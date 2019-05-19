@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Registro
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+    <ion-list lines="none">
+      <ion-list-header>
+        <ion-label>Nuevo usuario</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label position="stacked">Nombres <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input [(ngModel)]="newUser.firstName" #firstName="ngModel" name="firstName" autofocus required color="success"></ion-input>
+        <ion-text *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" color="danger">
+          Los apellidos son requeridos
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Apellidos <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input  [(ngModel)]="newUser.lastName" name="lastName" #lastName="ngModel" required></ion-input>
+        <ion-text *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" color="danger">
+            Los apellidos son requeridos
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Número de CC:</ion-label>
+        <ion-input type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Fecha de nacimiento:</ion-label>
+        <ion-input type="date"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ciudad / Municipio:</ion-label>
+        <ion-input clear-input placeholder="Lugar de residencia"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Dirección:</ion-label>
+        <ion-input clear-input multiple></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Numero fijo o celular:</ion-label>
+        <ion-input [(ngModel)]="newUser.phoneNumber" name="phoneNumber" #phoneNumber="ngModel" clear-input min="7" max="11" required type="tel"></ion-input>
+        <ion-text *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)" color="danger">
+          <div *ngIf="phoneNumber.errors.required">
+            El teléfono es requerido
+          </div>
+          <div *ngIf="phoneNumber.errors.minlength">
+            El número debe tener por lo menos siete dígitos
+          </div>
+          <div *ngIf="phoneNumber.errors.maxlength">
+            El número debe tener menos de once dígitos
+          </div>
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Correo electronico:</ion-label>
+        <ion-input clear-input type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Estado civil:</ion-label>
+        <ion-select placeholder="Select One">
+          <ion-select-option value="s">Soltero</ion-select-option>
+          <ion-select-option value="c">Casado</ion-select-option>
+          <ion-select-option value="v">Viudo</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mascotas</ion-label>
+        <ion-select multiple>
+          <ion-select-option value="pajaro" selected>Pajaros</ion-select-option>
+          <ion-select-option value="garo">Gato</ion-select-option>
+          <ion-select-option value="perro" selected>Perro</ion-select-option>
+          <ion-select-option value="no">Ninguno</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label class="obs" position="floating">Observaciones</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <!--[disabled]="registerForm.invalid"-->
+    <ion-button type="submit" expand="block" color="primary">Registrar</ion-button>
+  </form>
+
+</ion-content>
